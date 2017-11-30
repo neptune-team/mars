@@ -17,31 +17,54 @@ const style = {
   margin: 12,
 };
 
-function Login(props) {
-  return (
-    <div>
-      <h1 style={{margin: '35px'}}>Welcome</h1>
-      <TextField
-        floatingLabelText="Enter username"
-      />
-      <br />
-      <PasswordField
-        hintText="At least 8 characters"
-        floatingLabelText="Enter your password"
-        errorText="Your password is too short"/>
-      <br/>
-      <br/>
-      
-      <RaisedButton label="Log In" primary={true} style={style} />
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
 
-      <RaisedButton label="Sign Up" primary={true} style={style} containerElement={<Link to="/signup"/>}/>
+  handleChangeFn (e) {
+    this.setState({[e.target.id]: e.target.value});
+    console.log(this.state[e.target.id]);
+  }
 
-      <br/>
-      <Link to="/signup">Don't have an account?</Link>
-      <br/>   
-      <br/>
-    </div>
-  );
+  loginFn () {
+    console.log('login clicked');
+  }
+
+
+  render() {
+    return (
+      <div>
+        <h1 style={{margin: '35px'}}>Welcome</h1>
+        <TextField
+          id="username"
+          floatingLabelText="Enter username"
+          onChange={this.handleChangeFn.bind(this)}
+        />
+        <br />
+        <PasswordField
+          id="password"
+          hintText="At least 8 characters"
+          floatingLabelText="Enter your password"
+          errorText="Your password is too short"/>
+        <br/>
+        <br/>
+        
+        <RaisedButton label="Log In" primary={true} style={style} onClick={this.loginFn.bind(this)} />
+
+        <RaisedButton label="Sign Up" primary={true} style={style} containerElement={<Link to="/signup"/>}/>
+
+        <br/>
+        <Link to="/signup">Don't have an account?</Link>
+        <br/>   
+        <br/>
+      </div>
+    );
+  }
 }
 
 export default Login;
