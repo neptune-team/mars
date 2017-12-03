@@ -23,7 +23,6 @@ class Graph extends React.Component {
       cleanData: this.props.graphData,
       leftChart: 'Bar Chart',
       rightChart: 'Area Chart'
-      
     };
   }
 

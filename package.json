@@ -36,14 +36,8 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "prop-types": "^15.6.0",
-<<<<<<< HEAD
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-=======
-    "react": "^16.1.1",
-    "react-button": "^1.2.1",
-    "react-dom": "^16.1.1",
->>>>>>> fully functional charts
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-test-renderer": "^16.2.0",
