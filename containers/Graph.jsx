@@ -41,15 +41,15 @@ class Graph extends React.Component {
     } else {
       counterNum += 1;
     }
-    if (this.state.charts[this.state.current] === 'lineChartShowing') {
+    if (this.state.charts[counterNum] === 'lineChartShowing') {
       chartOnLeft = 'Bar Chart';
       chartOnRight = 'Area Chart';
     }
-    if (this.state.charts[this.state.current] === 'areaChartShowing') {
+    if (this.state.charts[counterNum] === 'areaChartShowing') {
       chartOnLeft = 'Line Chart';
       chartOnRight = 'Bar Chart';
     }
-    if (this.state.charts[this.state.current] === 'barChartShowing') {
+    if (this.state.charts[counterNum] === 'barChartShowing') {
       chartOnLeft = 'Area Chart';
       chartOnRight = 'Line Chart';
     }
@@ -262,39 +262,27 @@ class Graph extends React.Component {
     (this.state.timeframe === 'q4') ? q4ButtonStyle = {backgroundColor: '#337AFF', padding: '5px'} : q4ButtonStyle = {backgroundColor: '#33CEFF', padding: '5px'} ;
 
 
-///////////////////////
-const getPath = (x, y, width, height) => {
-  return `M${x},${y + height}
-          C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${x + width / 2}, ${y}
-          C${x + width / 2},${y + height / 3} ${x + 2 * width / 3},${y + height} ${x + width}, ${y + height}
-          Z`;
-};
+    //POINTED BAR CHART VARIABLES
+    const getPath = (x, y, width, height) => {
+      return `M${x},${y + height}
+              C${x + width / 3},${y + height} ${x + width / 2},${y + height / 3} ${x + width / 2}, ${y}
+              C${x + width / 2},${y + height / 3} ${x + 2 * width / 3},${y + height} ${x + width}, ${y + height}
+              Z`;
+    };
 
-const TriangleBar = (props) => {
-  const { fill, x, y, width, height } = props;
+    const TriangleBar = (props) => {
+      const { fill, x, y, width, height } = props;
 
-  return <path d={getPath(x, y, width, height)} stroke="none" fill={fill}/>;
-};
+      return <path d={getPath(x, y, width, height)} stroke="none" fill={fill}/>;
+    };
 
-TriangleBar.propTypes = {
-  fill: PropTypes.string,
-  x: PropTypes.number,
-  y: PropTypes.number,
-  width: PropTypes.number,
-  height: PropTypes.number,
-};
-
-
-
-
-
-
-
-//////////////////////
-
-   
-
-
+    TriangleBar.propTypes = {
+      fill: PropTypes.string,
+      x: PropTypes.number,
+      y: PropTypes.number,
+      width: PropTypes.number,
+      height: PropTypes.number,
+    };
 
 
     //LINE CHART
@@ -339,10 +327,10 @@ TriangleBar.propTypes = {
             </div>
           </div>
           <div>
-            {this.state.leftChart}
+              <RaisedButton label={this.state.leftChart} disabled={true} onClick={this.changeChartLeft.bind(this)} />
               <RaisedButton label="Next Chart Left" secondary={true} onClick={this.changeChartLeft.bind(this)} />
               <RaisedButton label="Next Chart Right" secondary={true} onClick={this.changeChartRight.bind(this)} />
-            {this.state.rightChart}
+              <RaisedButton label={this.state.rightChart} disabled={true} onClick={this.changeChartRight.bind(this)} />      
             {/*{this.state.leftChart}<button onClick={this.changeChartLeft.bind(this)}>NEXT CHART LEFT</button>
             <button onClick={this.changeChartRight.bind(this)}>NEXT CHART RIGHT</button>{this.state.rightChart}*/}
           </div>
@@ -397,10 +385,10 @@ TriangleBar.propTypes = {
             </div>
           </div>
           <div>
-            {this.state.leftChart}
+              <RaisedButton label={this.state.leftChart} disabled={true} onClick={this.changeChartLeft.bind(this)} />
               <RaisedButton label="Next Chart Left" secondary={true} onClick={this.changeChartLeft.bind(this)} />
               <RaisedButton label="Next Chart Right" secondary={true} onClick={this.changeChartRight.bind(this)} />
-            {this.state.rightChart}
+              <RaisedButton label={this.state.rightChart} disabled={true} onClick={this.changeChartRight.bind(this)} />
           </div>
         {this.props.graphData && this.props.primaryMovie.title ? <div>{this.props.primaryMovie.title} Release Date: {Movie1Release}</div> : ''}
         {this.props.graphData && this.props.secondaryMovie.title ? <div>{this.props.secondaryMovie.title} Release Date: {Movie2Release}</div> : ''}
@@ -454,10 +442,10 @@ TriangleBar.propTypes = {
             </div>
           </div>
           <div>
-            {this.state.leftChart}
+              <RaisedButton label={this.state.leftChart} disabled={true} onClick={this.changeChartLeft.bind(this)} />
               <RaisedButton label="Next Chart Left" secondary={true} onClick={this.changeChartLeft.bind(this)} />
               <RaisedButton label="Next Chart Right" secondary={true} onClick={this.changeChartRight.bind(this)} />
-            {this.state.rightChart}
+              <RaisedButton label={this.state.rightChart} disabled={true} onClick={this.changeChartRight.bind(this)} />
           </div>
         {this.props.graphData && this.props.primaryMovie.title ? <div>{this.props.primaryMovie.title} Release Date: {Movie1Release}</div> : ''}
         {this.props.graphData && this.props.secondaryMovie.title ? <div>{this.props.secondaryMovie.title} Release Date: {Movie2Release}</div> : ''}
@@ -511,10 +499,10 @@ TriangleBar.propTypes = {
             </div>
           </div>
           <div>
-            {this.state.leftChart}
+              <RaisedButton label={this.state.leftChart} disabled={true} onClick={this.changeChartLeft.bind(this)} />
               <RaisedButton label="Next Chart Left" secondary={true} onClick={this.changeChartLeft.bind(this)} />
               <RaisedButton label="Next Chart Right" secondary={true} onClick={this.changeChartRight.bind(this)} />
-            {this.state.rightChart}
+              <RaisedButton label={this.state.rightChart} disabled={true} onClick={this.changeChartRight.bind(this)} />
           </div>
         {this.props.graphData && this.props.primaryMovie.title ? <div>{this.props.primaryMovie.title} Release Date: {Movie1Release}</div> : ''}
         {this.props.graphData && this.props.secondaryMovie.title ? <div>{this.props.secondaryMovie.title} Release Date: {Movie2Release}</div> : ''}
