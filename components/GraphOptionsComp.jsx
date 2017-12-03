@@ -47,7 +47,6 @@ class GraphOptionsComp extends React.Component {
 		);
 
 	}
-  
 }
 
 export default GraphOptionsComp;
