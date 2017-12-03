@@ -21,21 +21,18 @@ const style = {
   margin: 12,
 };
 
-export class Login extends React.Component {
-
+class Login extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       username: "",
-      password: "",
-      logged: "",
-    }
+      password: ""
+    };
   }
 
-  handleChange(e) {
-    this.setState({[e.target.name]: e.target.value});
-    console.log(this.state[e.target.name]);
+  handleChangeFn (e) {
+    this.setState({[e.target.id]: e.target.value});
+    console.log(this.state[e.target.id]);
   }
 
   logInUser(obj) {
@@ -71,6 +68,7 @@ export class Login extends React.Component {
         .catch((err) => { console.log(err)})
     }
   }
+
 
   render() {
     return (
