@@ -10,10 +10,8 @@ class Settings extends React.Component {
 
 	render () {
 		return (
-		<div style={{width: '100%'}}>
-		    <h1>
-		      Settings
-		    </h1>
+		<div id='Settings'>
+		  	<i class="material-icons md-48">settings</i>
 		    <UpdateSettingsComp />
 		    <GraphOptionsComp />
 		</div>

@@ -16,11 +16,12 @@ function MovieDetail(props) {
         primaryMovie={props.primaryMovie}
         secondaryMovie={props.secondaryMovie}
       />
-      <Graph
+      {props.login && 
+      <div><Graph
         primaryMovie={props.primaryMovie}
-        secondaryMovie={props.secondaryMovie}
-      />
-      <Financials/>
+        secondaryMovie={props.secondaryMovie}/> 
+      <Financials/></div>
+      }
       <MovieInfo
         primaryMovie={props.primaryMovie}
         secondaryMovie={props.secondaryMovie}
@@ -34,8 +35,8 @@ MovieDetail.propTypes = {
   secondaryMovie: PropTypes.shape({}).isRequired,
 };
 
-function mapStateToProps({ primaryMovie, secondaryMovie }) {
-  return { primaryMovie, secondaryMovie };
+function mapStateToProps({ primaryMovie, secondaryMovie, login }) {
+  return { primaryMovie, secondaryMovie, login };
 }
 
 export default connect(mapStateToProps)(MovieDetail);

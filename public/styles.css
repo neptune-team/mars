@@ -1,6 +1,7 @@
 body {
 	font-family: 'Roboto', sans-serif;
   text-align: center;
+  font-size: 12px;
 }
 
 .input-group {
@@ -32,7 +33,38 @@ body {
 
 h5 {
     color: white;
+}
 
 .material-icons {
-	cursor: pointer;
+  cursor: pointer;
 }
+
+.FinancialWrapper {
+  margin: 30px;
+
+}
+
+#welcome {
+  color: #DD2C00;
+  padding: 20px;
+  width:100%;
+}
+
+
+#savedMoviesWarpper {
+  height: 100%;
+}
+
+#Settings {
+  width: 100%;
+  padding: 20px;
+}
+
+
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+
+.material-icons.red { color: #00B8D4; }

@@ -64,14 +64,12 @@ class App extends React.Component {
      
           <div>
             <AppBar
-              title="DEMO Movie DB"
+              style={{cursor: 'pointer'}}
+              title={this.props.login ? "Hello " + this.props.username: "DEMI MovieDB"}
               showMenuIconButton={false}
-              iconElementRight={this.props.login ? <Menu username={this.props.username}/> : <RaisedButton label="LogIn" style={{margin: '20px'}} href="/login"  /> }
+              iconElementRight={this.props.login ? <Menu username={this.props.username}/> : <RaisedButton label="login" style={{margin: '20px'}} href="/login"  /> }
               onTitleTouchTap={this.titleClikedHandle.bind(this)}
             />
-            
-            <hr/>
-
             <Switch>
               <Route path="/login" component={Login}/>
               <Route path="/signup" component={Signup}/>

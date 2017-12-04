@@ -8,6 +8,10 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { login } from '../actions/MovieAction';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -27,8 +31,13 @@ const Menu = (props) => (
     <MenuItem primaryText="Home" containerElement={<Link to="/" />}/>
     <MenuItem primaryText="Settings" containerElement={<Link to="/settings" />}/>
     <MenuItem primaryText="Saved" containerElement={<Link to="/saved" />}/>
-    <MenuItem primaryText="LogOut" containerElement={<Link to="/" />}/>
+    <MenuItem primaryText="LogOut" onClick={() => props.login(false)} containerElement={<Link to="/" />}/>
   </IconMenu>
 );
 
-export default Menu;
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ login }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(Menu);

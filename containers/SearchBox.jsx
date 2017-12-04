@@ -90,7 +90,8 @@ class SearchBox extends Component {
  
     //if the user already saved it, display like a you already saved this item
     //TODO: 
-
+    //set the text of the button to "Saved"
+    document.getElementById('saveButton').text = 'saved';
     axios.post('/saveMovie', 
       {username: this.props.username, 
       firstMovie: this.props.primaryMovie.title,
@@ -176,7 +177,7 @@ class SearchBox extends Component {
         {
           //user searched 2 movies and are comparing
           primaryMovie.title && secondaryMovie.title && this.props.login && 
-          <RaisedButton label="Save Comparison" primary={true} style={{margin: '20px'}} onClick={this.saveComparisonHandler.bind(this)}/>
+          <RaisedButton id='saveButton' label="Save Comparison" primary={true} style={{margin: '20px'}} onClick={this.saveComparisonHandler.bind(this)}/>
         }
       </Paper>
     );

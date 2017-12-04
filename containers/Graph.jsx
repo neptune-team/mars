@@ -149,7 +149,7 @@ class Graph extends React.Component {
 
     
     var sortedBetweenMoveiesData = [...zipperInMovies(Movie1CleanData, Movie2CleanData)];
-    console.log('COMBINED CLEAN DATA PERFECT!!! = ', sortedBetweenMoveiesData);
+    // console.log('COMBINED CLEAN DATA PERFECT!!! = ', sortedBetweenMoveiesData);
 
     var context = this;
     var makeTimeFocusedData = function(countWeeks, data) {
