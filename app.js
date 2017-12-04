@@ -150,8 +150,7 @@ app.post('/signUp', (req, res) => {
 })
 
 app.post('/saveMovie', (req, res) => {
-  //save the username, firstMovie, secondMovie to database.
-  // console.log('making post request to server to store to database');
+  //save the username, firstMovie, secondMovie... to database.
   console.log('Save this movie to my database: ', req.body);
   var movie = new SavedMovies(req.body);
   movie.save(function(err, result) {
@@ -164,21 +163,10 @@ app.post('/saveMovie', (req, res) => {
 });
 
 app.get('/savedMovies', (req, res) => {
-  console.log('req body in get savedMovies: ', req.body);
-  //TODO: READ USERNAME FROM REQ
-  var username = 'Enki';
+  var username = req.query.username;
   SavedMovies.find({username: username}, function(err, result) {
-    // console.log('querying database with username ENki : ', result);
     res.send(result);
   })
-  // const savedMovies = await SavedMovies.find({ username: req.body.username });
-    // if (movie) {
-    //   const emotion = await avgTweetEmotion(movie.title);
-    //   const results = movie.toObject();
-    //   results.emotion = emotion;
-    //   console.log(results);
-    //   return res.send(results);
-    // }
 });
 
 app.put('/deleteSaved', (req, res) => {
@@ -194,9 +182,6 @@ app.put('/deleteSaved', (req, res) => {
     });
   }
   res.send();
-  //SavedMovies.find({ username: , firstMovie:, secondMovie: }).remove( callback )
-  //[{}]
-  //for each object in the array, call remove on the database.
 });
 
 

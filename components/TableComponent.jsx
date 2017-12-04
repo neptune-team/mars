@@ -1,7 +1,7 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
 import axios from 'axios';
-import { fetchMovie1, fetchMovie2 } from '../actions/MovieAction';
+import { fetchMovie1, fetchMovie2, fetchSavedMovies } from '../actions/MovieAction';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -37,17 +37,12 @@ class TableComponent extends React.Component {
 	}
 
 	rowClicked(result) {
-		console.log('rowclicked ', );
+		// console.log('rowclicked ', );
 		var indexOfClickedRow = result[0];
-		var clickedMovieObj = this.props.movies[indexOfClickedRow];
+		var clickedMovieObj = this.props.savedMovies[indexOfClickedRow];
 		// clickedMovieObj.tmdbid;
 
-		console.log('clicked obj: ', clickedMovieObj);
-
-		//redirect the user to the home page
-		
-		//want to wait for the store to update first before redirecting.
-
+		// console.log('clicked obj: ', clickedMovieObj);
 		this.props.history.push("/");
 
 		this.props.fetchMovie1(clickedMovieObj.tmdbid1);
@@ -55,46 +50,40 @@ class TableComponent extends React.Component {
 		setTimeout(() => {
 			this.props.fetchMovie2(clickedMovieObj.tmdbid2);
 		}	, 1000);
-		
-
-		
-
-		
-
-
 	}
 
 	checkboxClicked(e) {
 		//store all the check
-		console.log('target: ', e.target);
+		// console.log('target: ', e.target);
 		e.stopPropagation();
 		
 		var clickedObj = JSON.parse(e.target.value);
-		console.log('sclicked OBJECT :', clickedObj);
+		// console.log('sclicked OBJECT :', clickedObj);
 		if (e.target.checked) {
 			this.state.checkedObj[clickedObj.id] = clickedObj;
-			console.log('here is the stored check : ', this.state.checkedObj);
+			// console.log('here is the stored check : ', this.state.checkedObj);
 		} else {
 			//user unchecked something that was checked
 
 			//remove from checkedObj the object at index 
 			delete this.state.checkedObj[clickedObj.id];
-			console.log('here is the stored check delete: ', this.state.checkedObj);
+			// console.log('here is the stored check delete: ', this.state.checkedObj);
 		}
 	}
 
 	deleteClicked() {
-		console.log('deleting these : ', this.state.checkedObj);
+		// console.log('deleting these : ', this.state.checkedObj);
 		axios.put('/deleteSaved', this.state.checkedObj).
 		then((response) => {
-			console.log('deleted successfull on client side');
+			// console.log('deleted successfull on client side');
 			this.state.checkedObj = {};
-			this.props.fetchSaved();
+			this.props.fetchSavedMovies(this.props.username);
 		});
 	}
 
+
 	render() {
-		console.log('rerenders')
+		console.log('rerenders table agaaaaiiinn')
 	  return (
 	  	<div style={{padding: '20px'}}>
 	     <Table
@@ -122,12 +111,12 @@ class TableComponent extends React.Component {
 	        showRowHover={false}
 	        stripedRows={false}
 	      >
-	        {this.props.movies.map( (savedMovieObj, index) => (
+	        {this.props.savedMovies.map( (savedMovieObj, index) => (
 	          <TableRow style={{cursor: 'pointer'}}>
 	          	
-		          	<TableRowColumn> 
+		          	<TableRowColumn > 
 		            	<input key={this.state.idCounter} type="checkbox" id={this.state.idCounter++} onClick={this.checkboxClicked.bind(this)} 
-		            	value={JSON.stringify({id: this.state.idCounter - 1, username: this.props.user, firstMovie: savedMovieObj.firstMovie, secondMovie: savedMovieObj.secondMovie})}
+		            	value={JSON.stringify({id: this.state.idCounter - 1, username: this.props.username, firstMovie: savedMovieObj.firstMovie, secondMovie: savedMovieObj.secondMovie})}
 		            	/>
 		            </TableRowColumn>
 		            <TableRowColumn >  	
@@ -144,14 +133,12 @@ class TableComponent extends React.Component {
 	          ))
 	      	}
 	      </TableBody>
-	      <TableFooter>
-	        <TableRow style={{backgroundColor: '#a0c1f7'}}>
-	          <TableRowColumn colSpan="3" style={{textAlign: 'center'}}>
-	            
-	         	<i class="material-icons">delete_forever</i>
-	          <i class="material-icons" onClick={this.deleteClicked.bind(this)}>delete_forever</i>
-	          </TableRowColumn>
-	        </TableRow>
+	      <TableFooter >
+	      	<TableRow style={{textAlign: 'center'}}>
+	      	<TableRowColumn> 
+	      		<i style={{height: '100%', width: '100%', padding: '20px', textAlign: 'center'}} className="material-icons md-36" onClick={this.deleteClicked.bind(this)}>delete_forever</i>    
+	      	</TableRowColumn> 
+	      	</TableRow>
 	      </TableFooter>
 
 
@@ -170,12 +157,15 @@ class TableComponent extends React.Component {
 //   return { savedMovies, username };
 // }
 
-// function mapStateToProps({ financials, primaryMovie, secondaryMovie }) {
-//   return { financials, primaryMovie, secondaryMovie };
+// function mapStateToProps({ username, savedMovies }) {
+//   return { username, savedMovies };
 // }
 
+	// user={this.props.username} movies={this.props.savedMovies} fetchSaved={this.props.fetchSavedMovies}
+
+
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchMovie1, fetchMovie2 }, dispatch);
+  return bindActionCreators({ fetchMovie1, fetchMovie2, fetchSavedMovies }, dispatch);
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(TableComponent));

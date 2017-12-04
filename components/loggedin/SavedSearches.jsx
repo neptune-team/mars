@@ -39,23 +39,25 @@ class SavedSearches extends React.Component {
 	}
 
 	subComponent() {
+		
 		if (this.props.savedMovies.length > 0) {
 			return (
-				<TableComponent user={this.props.username} movies={this.props.savedMovies} fetchSaved={this.props.fetchSavedMovies} />
+				<TableComponent username={this.props.username} savedMovies={this.props.savedMovies}/>
 			)
 		} else {
 			return (
-				<div>There are no saved Comparisons.</div>
+				<div>
+					<div style={{width: '50%', position: 'relative', left:'25%', backgroungColor:'blue', margin: '30px'}}>
+						<img style={{width: '30%'}} src="emptypage.png"/>
+					</div>
+				</div>
 			)
 		}
 
 	}
   render() {
   	return (
-	 <div>
-	    <h1>
-	      Saved Movies
-	    </h1>
+	 	<div id='savedMoviesWarpper'>
 	    <div style={{textAlign: 'center'}}>
 	    	{this.subComponent()}
 	    </div>
@@ -66,12 +68,11 @@ class SavedSearches extends React.Component {
 
 
 function mapStateToProps({ savedMovies, username }) {
-	console.log('please work : ', savedMovies);
   return { savedMovies, username };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchSavedMovies, fetchMovie1, fetchMovie2 }, dispatch);
+  return bindActionCreators({ fetchSavedMovies}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SavedSearches);

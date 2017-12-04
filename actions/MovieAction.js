@@ -51,8 +51,12 @@ export function fetchUsername(userName) {
 
 export function fetchSavedMovies(username) {
   //get the saved movies associated with the username
-  const request = axios.get('/savedMovies', {username: username});
-  console.log('does not go hereeee? why?');
+
+  
+  const request = axios.get('/savedMovies', {
+    params: {
+      username: username
+    }});
 
   return {
     type: FETCH_SAVED_MOVIES,

@@ -60,8 +60,7 @@ function Financials(props) {
   }
 
   return (
-  <div>
-    <h1>Financials</h1>
+  <div className='FinancialWrapper'>
     <div>{content()}</div>
   </div>)
 }
